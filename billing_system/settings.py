@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'billing',
     'rest_framework',
     'djoser',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
