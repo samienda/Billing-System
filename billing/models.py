@@ -1,16 +1,19 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-
+from django.conf import settings
 # Create your models here.
 
 
 class Employee(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     username = models.CharField(max_length=50, unique=True)
-    password = models.CharField(max_length=50)
+    user = models.OneToOneField(sett)
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     email = models.EmailField()
 
 
