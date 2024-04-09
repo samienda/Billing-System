@@ -1,12 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import EmployeeSerializer, CustomerSerializer, ProductSerializer, TransactionSerializer
-from .models import Employee, Customer, Product, Transaction
-
-
-class EmployeeViewSet(ModelViewSet):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+from .serializers import CustomerSerializer, ProductSerializer, TransactionSerializer
+from .models import Customer, Product, Transaction
 
 
 class CustomerViewSet(ModelViewSet):

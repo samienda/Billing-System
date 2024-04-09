@@ -1,20 +1,15 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-from django.conf import settings
+from django.contrib.auth import get_user_model
 # Create your models here.
-
-
-class Employee(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    username = models.CharField(max_length=50, unique=True)
-    user = models.OneToOneField(sett)
 
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    email = models.EmailField()
+    total_billed_amount = models.DecimalField(
+        MinValueValidator(0.0), max_digits=10, decimal_places=2)
+
 
 
 class Product(models.Model):
@@ -31,3 +26,4 @@ class Transaction(models.Model):
     total_amount = models.DecimalField(
         MinValueValidator(1.0), decimal_places=2, max_digits=10)
     timestamp = models.DateTimeField(auto_now_add=True)
+    employee = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

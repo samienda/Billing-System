@@ -1,17 +1,17 @@
 from rest_framework import serializers
-from .models import Customer, Employee, Product, Transaction
+from djoser.serializers import UserSerializer as BaseUserSerializer
+from .models import Customer, Product, Transaction
 
 
-class EmployeeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Employee
-        fields = ['id', 'username', 'password']
+class UserSerializer(BaseUserSerializer):
+    class Meta(BaseUserSerializer.Meta):
+        fields = ['id', 'username', 'firstname', 'lastname']
 
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ['id', 'first_name', 'last_name', 'email']
+        fields = ['id', 'first_name', 'last_name', 'total_billed_amount']
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -24,4 +24,4 @@ class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ['id', 'customer', 'product',
-                  'quantity', 'total_amount', 'timestamp']
+                  'quantity', 'total_amount', 'timestamp', 'employee']
