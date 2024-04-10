@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework.exceptions import ValidationError
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -37,4 +38,13 @@ class TransactionViewSet(ModelViewSet):
     search_fields = '__all__'
 
     def perform_create(self, serializer):
+        product = serializer.validated_data['product']
+        quantity = serializer.validated_data['quantity']
+
+        if product.stock < quantity:
+            raise ValidationError(
+                {'stock': f"not enough in stock. you have only {product.stock}"}
+            )
+        print(self.request.user)
+
         serializer.save(employee=self.request.user)
